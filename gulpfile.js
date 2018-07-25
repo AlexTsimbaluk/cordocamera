@@ -8,8 +8,9 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglifyjs'),
 	rename = require('gulp-rename'),
 	cssnano = require('gulp-cssnano'),
-	browserSync = require('browser-sync')
-	;
+	browserSync = require('browser-sync'),
+    exec = require('child_process').exec // для запуска команд в терминале
+;
 
 
 
@@ -44,23 +45,26 @@ gulp.task('build', ['clean', 'less', 'js'], function() {
 
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', ['cordova-run'], function() {
 	'use strict';
-	browserSync({
-		/*server: {
-			baseDir: 'www'
-		},*/
-		proxy: 'localhost:8000',
-		port: 	9999,
-		notify: false,
 
-		/*ghostMode: {
-		    clicks: true,
-		    forms: true,
-		    scroll: false
-		},*/
-		ghostMode: false
-	});
+    setTimeout(() => {
+    	browserSync({
+    		/*server: {
+    			baseDir: 'www'
+    		},*/
+    		proxy: 'localhost:8000',
+    		port: 	9999,
+    		notify: false,
+
+    		/*ghostMode: {
+    		    clicks: true,
+    		    forms: true,
+    		    scroll: false
+    		},*/
+    		ghostMode: false
+    	});
+    }, 1500);
 });
 
 gulp.task('less', function() {
@@ -122,8 +126,14 @@ gulp.task('js-min', function() {
 			.pipe(gulp.dest('www/js'));
 });
 
+gulp.task('cordova-run', function() {
+    'use strict';
 
-// gulp.task('watch', ['browser-sync', 'less'], function() {
+    console.log('::cordova:run');
+    exec('cordova run');
+});
+
+
 gulp.task('watch', ['browser-sync'], function() {
 	'use strict';
 	gulp.watch('www/*.html', browserSync.reload);
@@ -134,7 +144,6 @@ gulp.task('watch', ['browser-sync'], function() {
     	[
     		'www/js/index.js'
     	],
-    	// ['js', 'js-min']
     	['js']
 	);
 
