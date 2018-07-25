@@ -47,10 +47,10 @@ gulp.task('build', ['clean', 'less', 'js'], function() {
 gulp.task('browser-sync', function() {
 	'use strict';
 	browserSync({
-		server: {
+		/*server: {
 			baseDir: 'www'
-		},
-		// proxy: 'soundstream',
+		},*/
+		proxy: 'localhost:8000',
 		port: 	9999,
 		notify: false,
 
