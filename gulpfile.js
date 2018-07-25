@@ -119,6 +119,16 @@ gulp.task('js-min', function() {
 			.pipe(gulp.dest('www/js'));
 });
 
+gulp.task('cordova-serve', function() {
+    console.log('::cordova:serve');
+    exec('cordova serve');
+});
+
+gulp.task('cordova-build', function() {
+    console.log('::cordova:build');
+    exec('cordova build');
+});
+
 gulp.task('cordova-run', function() {
     console.log('::cordova:run');
     exec('cordova run');
