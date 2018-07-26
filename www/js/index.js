@@ -26,3 +26,22 @@ var app = {
 };
 
 app.initialize();
+
+function gpsSuccess(position) {
+    var $gpsInfo = $('.gps-info');
+
+    var gpsInfo = 'Latitude: ' + position.coords.latitude + '<br/>' + 'Longitude: ' + position.coords.longitude + '<br/>' + 'Altitude: ' + position.coords.altitude + '<br/>' + 'Accuracy: ' + position.coords.accuracy + '<br/>' + 'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br/>' + 'Heading: ' + position.coords.heading + '<br/>' + 'Speed: ' + position.coords.speed + '<br/>';
+
+    $gpsInfo.html(gpsInfo);
+}
+
+function gpsError(error) {
+    $('.gps-error').html(error.message);
+
+    console.log('GPS Error!');
+    console.log(error);
+}
+
+$('.get-coords').on('click', () => {
+    navigator.geolocation.getCurrentPosition(gpsSuccess, gpsError);
+});
