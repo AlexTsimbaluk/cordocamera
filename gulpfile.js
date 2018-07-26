@@ -128,22 +128,27 @@ gulp.task('js-min', function() {
 
 gulp.task('cordova-serve', function() {
     console.log('::cordova:serve');
+
     exec('cordova serve');
 });
 
 gulp.task('cordova-build', function() {
     console.log('::cordova:build');
+
     exec('cordova build');
 });
 
 gulp.task('cordova-run', function() {
-    console.log('::cordova:run');
+    console.log('::cordova:run:browser');
+    console.log('::cordova:run:android');
+
     exec('cordova run browser');
     exec('cordova run android');
 });
 
 gulp.task('cordova-run-android', function() {
     console.log('::cordova:run:android');
+
     exec('cordova run android');
 });
 
