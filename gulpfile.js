@@ -13,6 +13,10 @@ var gulp = require('gulp'),
     exec = require('child_process').exec // для запуска команд в терминале
 ;
 
+// при изменении файлов откладываем перезагрузку на это время,
+// чтобы cordova успела перезапуститься
+var RELOAD_TIMEOUT = 1500;
+
 
 
 
@@ -64,9 +68,10 @@ gulp.task('browser-sync', ['cordova-run'], function() {
 });
 
 gulp.task('deferred-reload', ['cordova-serve'], function() {
+    console.log('Waiting for ' + (RELOAD_TIMEOUT / 1000) + 's...');
     setTimeout(() => {
         browserSync.reload();
-    }, 1500);
+    }, RELOAD_TIMEOUT);
 });
 
 gulp.task('less', function() {
@@ -143,7 +148,7 @@ gulp.task('cordova-run', function() {
 });
 
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch('www/*.html', ['cordova-serve', 'deferred-reload']);
+	gulp.watch('www/*.html', ['deferred-reload']);
 
 	gulp.watch('www/**/*.php', browserSync.reload);
 	gulp.watch('www/layouts/*.php', browserSync.reload);
