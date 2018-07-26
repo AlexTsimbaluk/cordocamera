@@ -9,6 +9,9 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
   "dependent_plugins": {}
