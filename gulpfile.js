@@ -56,18 +56,12 @@ gulp.task('browser-sync', ['cordova-run'], function() {
     		proxy: 'localhost:8000',
     		port: 	9999,
     		notify: false,
-
-    		/*ghostMode: {
-    		    clicks: true,
-    		    forms: true,
-    		    scroll: false
-    		},*/
     		ghostMode: false
     	});
-    }, 1500);
+    }, RELOAD_TIMEOUT);
 });
 
-gulp.task('deferred-reload', ['cordova-serve'], function() {
+gulp.task('deferred-reload', ['cordova-build', 'cordova-run-android', 'cordova-serve'], function() {
     console.log('Waiting for ' + (RELOAD_TIMEOUT / 1000) + 's...');
     setTimeout(() => {
         browserSync.reload();
@@ -145,6 +139,11 @@ gulp.task('cordova-build', function() {
 gulp.task('cordova-run', function() {
     console.log('::cordova:run');
     exec('cordova run');
+});
+
+gulp.task('cordova-run-android', function() {
+    console.log('::cordova:run');
+    exec('cordova run android');
 });
 
 gulp.task('watch', ['browser-sync'], function() {
