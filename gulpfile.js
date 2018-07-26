@@ -138,11 +138,12 @@ gulp.task('cordova-build', function() {
 
 gulp.task('cordova-run', function() {
     console.log('::cordova:run');
-    exec('cordova run');
+    exec('cordova run browser');
+    exec('cordova run android');
 });
 
 gulp.task('cordova-run-android', function() {
-    console.log('::cordova:run');
+    console.log('::cordova:run:android');
     exec('cordova run android');
 });
 
