@@ -28,10 +28,8 @@ body {
   -webkit-user-select: none;
   /* prevent copy paste, to allow, change 'none' to 'text' */
   background-color: #E4E4E4;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0%, #A7A7A7), color-stop(51%, #E4E4E4));
-  background-image: linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-  background-image: -ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #A7A7A7), color-stop(0.51, #E4E4E4));
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#A7A7A7), color-stop(51%, #E4E4E4));
+  background-image: linear-gradient(to bottom, #A7A7A7 0%, #E4E4E4 51%);
   background-attachment: fixed;
   font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 12px;

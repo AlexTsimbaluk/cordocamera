@@ -63,6 +63,12 @@ gulp.task('browser-sync', ['cordova-run'], function() {
     }, 1500);
 });
 
+gulp.task('deferred-reload', ['cordova-serve'], function() {
+    setTimeout(() => {
+        browserSync.reload();
+    }, 1500);
+});
+
 gulp.task('less', function() {
 	return gulp.src('www/less/index.less')
 			.pipe(less())
@@ -75,7 +81,8 @@ gulp.task('less', function() {
 			.pipe(concat('main.min.css'))
 	        .pipe(cssnano())*/
 			.pipe(gulp.dest('www/css/'))
-			.pipe(browserSync.reload({stream: true}));
+			// .pipe(browserSync.reload({stream: true}))
+        ;
 });
 
 /*gulp.task('utils', function() {
@@ -109,7 +116,8 @@ gulp.task('js', function() {
 			.pipe(babel())
 			.pipe(concat('index.js'))
 			.pipe(gulp.dest('www/js'))
-			.pipe(browserSync.reload({stream: true}));
+			// .pipe(browserSync.reload({stream: true}))
+        ;
 });
 
 gulp.task('js-min', function() {
@@ -135,7 +143,8 @@ gulp.task('cordova-run', function() {
 });
 
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch('www/*.html', browserSync.reload);
+	gulp.watch('www/*.html', ['cordova-serve', 'deferred-reload']);
+
 	gulp.watch('www/**/*.php', browserSync.reload);
 	gulp.watch('www/layouts/*.php', browserSync.reload);
 
@@ -143,12 +152,12 @@ gulp.task('watch', ['browser-sync'], function() {
     	[
     		'www/js/index.js'
     	],
-    	['js']
+    	['js', 'deferred-reload']
 	);
 
 	gulp.watch([
 			'www/less/index.less'
-		], ['less']);
+		], ['less', 'deferred-reload']);
 
 
 	// gulp.watch('www/libs/utils/*.less', ['utils']);
