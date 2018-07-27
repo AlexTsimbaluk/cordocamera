@@ -84,7 +84,7 @@ gulp.task('less', function() {
         ;
 });
 
-/*gulp.task('utils', function() {
+gulp.task('utils', function() {
 	return gulp.src('www/libs/utils/layout.less')
 			.pipe(less())
 			.pipe(autoprefixer(
@@ -93,9 +93,9 @@ gulp.task('less', function() {
 			)
 			.pipe(gulp.dest('www/libs/utils/'))
 			.pipe(browserSync.reload({stream: true}));
-});*/
+});
 
-/*gulp.task('_bootstrap-material', function() {
+gulp.task('_bootstrap-material', function() {
 	return gulp.src(
                 'www/libs/bootstrap-material-design-master/less/bootstrap-material-design.less'
             )
@@ -106,7 +106,7 @@ gulp.task('less', function() {
 			)
 			.pipe(gulp.dest('www/libs/libs/bootstrap-material-design-master/dist/css'))
 			.pipe(browserSync.reload({stream: true}));
-});*/
+});
 
 gulp.task('js', function() {
 	return gulp.src([
@@ -167,10 +167,17 @@ gulp.task('watch', ['browser-sync'], function() {
 
 	gulp.watch([
 			'www/less/index.less'
-		], ['less', 'deferred-reload']);
+		], ['less', 'deferred-reload']
+    );
+
+    gulp.watch([
+            'www/less/*.less',
+            'www/libs/bootstrap-material-design-master/less/*.less'
+        ], ['less', 'deferred-reload']
+    );
 
 
-	// gulp.watch('www/libs/utils/*.less', ['utils']);
+	gulp.watch('www/libs/utils/*.less', ['utils', 'deferred-reload']);
 });
 
 gulp.task('default', ['watch']);
