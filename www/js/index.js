@@ -10,6 +10,8 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function () {
         this.receivedEvent('deviceready');
+
+        $.material.init();
     },
 
     // Update DOM on a Received Event
@@ -27,21 +29,35 @@ var app = {
 
 app.initialize();
 
-function gpsSuccess(position) {
-    var $gpsInfo = $('.gps-info');
+(function () {
+    var gpsOptions = {
+        enableHighAccuracy: true,
+        timeout: 15000
+    };
 
-    var gpsInfo = 'Latitude: ' + position.coords.latitude + '<br/>' + 'Longitude: ' + position.coords.longitude + '<br/>' + 'Altitude: ' + position.coords.altitude + '<br/>' + 'Accuracy: ' + position.coords.accuracy + '<br/>' + 'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br/>' + 'Heading: ' + position.coords.heading + '<br/>' + 'Speed: ' + position.coords.speed + '<br/>';
+    function gpsSuccess(position) {
+        var $gpsInfo = $('.gps-info');
+        var crd = position.coords;
 
-    $gpsInfo.html(gpsInfo);
-}
+        var gpsInfo = 'Широта: ' + crd.latitude + '<br/>Долгота: ' + crd.longitude + '<br/>Высота: ' + crd.altitude + '<br/>Точность: ' + crd.accuracy + '<br/>Точность высоты: ' + crd.altitudeAccuracy + '<br/>Направление: ' + crd.heading + '<br/>Скорость: ' + crd.speed + '<br>Timestamp: ' + position.timestamp;
 
-function gpsError(error) {
-    $('.gps-error').html(error.message);
+        $gpsInfo.html(gpsInfo);
+    }
 
-    console.log('GPS Error!');
-    console.log(error);
-}
+    function gpsError(error) {
+        $('.gps-error').html('GPS ERROR(' + error.code + '): ' + error.message);
 
-$('.get-coords').on('click', () => {
-    navigator.geolocation.getCurrentPosition(gpsSuccess, gpsError);
-});
+        console.log('GPS Error!');
+        console.log(error);
+    }
+
+    $('.get-coords').on('click', () => {
+        navigator.geolocation.getCurrentPosition(gpsSuccess, gpsError, gpsOptions);
+    });
+
+    $('.clear-coords').on('click', () => {
+        $('.gps-error, .gps-info').html('');
+    });
+})();
+
+$(document).on('ready', function () {});
