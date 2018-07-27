@@ -1,0 +1,357 @@
+@width-sm: 768px;
+@width-md: 992px;
+@width-lg: 1200px;
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
+.h-fill {
+    height: 100%;
+}
+
+.w-fill {
+    width: 100%;
+}
+
+.h-auto {
+    height: auto;
+}
+
+@media (orientation: landscape) {
+    *:not(html).portrait,
+    *:not(html).flex.portrait {
+        display: none;
+    }
+}
+
+@media (orientation: portrait) {
+    *:not(html).landscape,
+    *:not(html).flex.landscape {
+        display: none;
+    }
+}
+
+.child- {
+    &center, &vcenter  {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    &center {
+        justify-content: center;
+        >* {
+            margin: auto;
+        }
+    }
+
+    &vcenter {
+        justify-content: flex-start;
+        >* {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
+    &vtop {
+        display: flex;
+
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+
+
+        >* {
+            margin: auto;
+            margin-top: 0;
+        }
+    }
+
+    &vbottom {
+        display: flex;
+
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+
+
+        >* {
+            margin: auto;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.flex > *.overflow,
+.flex.eflex > *.overflow,
+.flex.eflex.overflow,
+.flex.overflow,
+.overflow {
+    &-y {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }   
+
+    &-x {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }   
+}
+
+@media (orientation: landscape) {
+    .flex > *.lo-overflow,
+    .flex.eflex > *.lo-overflow,
+    .flex.eflex.lo-overflow,
+    .flex.lo-overflow,
+    .lo-overflow {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+@media (orientation: portrait) {
+    .flex > *.po-overflow,
+    .flex.eflex > *.po-overflow,
+    .flex.eflex.po-overflow,
+    .flex.po-overflow,
+    .po-overflow {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+@media (max-width: 767px) {
+    .flex > *.overflow-xs,
+    .flex.eflex > *.overflow-xs,
+    .flex.eflex.overflow-xs,
+    .flex.overflow-xs,
+    .overflow-xs {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+@media (min-width: @width-sm) and (max-width: 991px) {
+    .flex > *.overflow-sm,
+    .flex.eflex > *.overflow-sm,
+    .flex.eflex.overflow-sm,
+    .flex.overflow-sm,
+    .overflow-sm {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+@media (min-width: @width-md) and (max-width: 1200px) {
+    .flex > *.overflow-md,
+    .flex.eflex > *.overflow-md,
+    .flex.eflex.overflow-md,
+    .flex.overflow-md,
+    .overflow-md {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+@media (min-width: @width-lg) {
+    .flex > *.overflow-lg,
+    .flex.eflex > *.overflow-lg,
+    .flex.eflex.overflow-lg,
+    .flex.overflow-lg,
+    .overflow-lg {
+        &-y {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+
+        &-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }   
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@prop-font-name: font-size; // Префикс свойства
+@levels-font-size-count: 30;  // Количество классов
+
+@width-sm: 768px;
+@width-md: 992px;
+@width-lg: 1200px;
+
+
+// классы от .font-size-1 до .font-size-30
+// дают размеры шрифта от 0.1em до 3em
+.generate-font-size(@levels-font-size-count, @q: 1) when (@q =< @levels-font-size-count) {
+    .@{prop-font-name}-@{q} {
+        font-size: (0em + (@q / 10));
+    }
+    .generate-font-size(@levels-font-size-count, (@q + 1));
+}
+.generate-font-size(@levels-font-size-count);
+
+.uppercase {
+    text-transform: uppercase;
+}
+.uppercase-none {
+    text-transform: none;
+}
+.text-bolder {
+    font-weight: 500;
+}
+.text-bold {
+    font-weight: 700;
+}
+
+.text-wrap {
+    white-space: normal;
+}
+
+.text-pre {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+// Класс запрещает ресайзить textarea
+.noresize {
+    resize: none;
+}
+
+// класс для определения расположения элементов в потоке
+.display-block {
+    display: block;
+}
+.display-inline-block {
+    display: inline-block;
+}
+.display-inline {
+    display: inline;
+}
+
+
+// классы для margin: auto;
+.m_a {
+    margin: auto;
+}
+.mh_a {
+    margin-left: auto;
+    margin-right: auto;
+}
+.mv_a {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+.ml_a {
+    margin-left: auto;
+}
+.mr_a {
+    margin-right: auto;
+}
+.mb_a {
+    margin-bottom: auto;
+}
+.mt_a {
+    margin-top: auto;
+}
+
+// классы для margin: 0;
+.m_0 {
+    margin: 0;
+}
+.mh_0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+.mv_0 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.ml_0 {
+    margin-left: 0;
+}
+.mr_0 {
+    margin-right: 0;
+}
+.mb_0 {
+    margin-bottom: 0;
+}
+.mt_0 {
+    margin-top: 0;
+}
+
+// классы для padding: 0;
+.p_0 {
+    padding: 0;
+}
+.ph_0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+.pv_0 {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.pl_0 {
+    padding-left: 0;
+}
+.pr_0 {
+    padding-right: 0;
+}
+.pb_0 {
+    padding-bottom: 0;
+}
+.pt_0 {
+    padding-top: 0;
+}
+
+

@@ -1,0 +1,102 @@
+/* Настройки */
+/* vim: set ft=css et ts=4: */
+@quantum: 24;
+@width-sm: 768px;
+@width-md: 992px;
+@width-lg: 1200px;
+
+@import "utils";
+
+/* Собственно css */
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    padding: 0px;
+    margin: 0px;
+
+    >* {
+        padding: 0px;
+        margin: 0px;
+        overflow: hidden;
+        flex: 0 0 auto;
+    }
+
+
+    /* гравитация */
+    .orientationVariant(@prefix) {
+        &.@{prefix}left               {   flex-direction: row;                }
+        &.@{prefix}right              {   flex-direction: row-reverse;        }
+        &.@{prefix}top                {   flex-direction: column;             }
+        &.@{prefix}bottom             {   flex-direction: column-reverse;     }
+        &.@{prefix}left, &.@{prefix}right   {   &:not(.eflex) >* { height: 100%;   }}
+        &.@{prefix}top, &.@{prefix}bottom   {   &:not(.eflex) >* { width: 100%;    }}
+
+        .ssize(@suffix) {
+            .loop(@q) when(@q >= 0) {
+                > .@{prefix}grow@{suffix}-@{q} {
+                    flex-grow: @q;
+                }
+                > .@{prefix}shrink@{suffix}-@{q} {
+                    flex-shrink: @q;
+                }
+                .loop(@q - 1);
+            }
+            .loop(@quantum);
+        }
+                                        .ssize(~"");    /* без суффиксов */
+        @media(min-width: @width-sm) {  .ssize(-sm);    }
+        @media(min-width: @width-md) {  .ssize(-md);    }
+        @media(min-width: @width-lg) {  .ssize(-lg);    }
+    }
+                                        .orientationVariant(~"");
+    @media (orientation: landscape) {   .orientationVariant(~"lo-"); }
+    @media (orientation: portrait)  {   .orientationVariant(~"po-"); }
+
+
+    
+    .variant(@prefix, @sprefix) {
+
+        .ssize(@suffix) {
+            .loop(@q) when(@q >= 0) {
+                &.@{prefix}left, &.@{prefix}right {
+                    > .@{sprefix}size@{suffix}-@{q} {
+                        width: (floor(10000000000% * @q / 24) / 100000000);
+                    }
+                }
+
+                &.@{prefix}top, &.@{prefix}bottom {
+                    > .@{sprefix}size@{suffix}-@{q} {
+                        height: (floor(10000000000% * @q / 24) / 100000000);
+                    }
+                }
+                .loop(@q - 1);
+            }
+            .loop(@quantum);
+        }
+                                        .ssize(~"");    /* без суффиксов */
+        @media(min-width: @width-sm) {  .ssize(-sm);    }
+        @media(min-width: @width-md) {  .ssize(-md);    }
+        @media(min-width: @width-lg) {  .ssize(-lg);    }
+    }
+                                        .variant(~"", ~""); /* без преффиксов */
+
+    @media (orientation: landscape) {
+                                        .variant(~"", ~"lo-");
+                                        .variant(~"lo-", ~"");
+                                        .variant(~"lo-", ~"lo-");
+    }
+    @media (orientation: portrait)  {
+                                        .variant(~"", ~"po-");
+                                        .variant(~"po-", ~"");
+                                        .variant(~"po-", ~"po-");
+    }
+
+    .eflex {
+        flex-wrap: wrap;
+        &.forward   {   flex-wrap: wrap;            }
+        &.backward  {   flex-wrap: wrap-reverse;    }
+    }
+}
