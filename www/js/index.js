@@ -1,3 +1,5 @@
+'use strict';
+
 var app = {
     // Application Constructor
     initialize: function () {
@@ -12,6 +14,8 @@ var app = {
         this.receivedEvent('deviceready');
 
         $.material.init();
+
+        window.open = cordova.InAppBrowser.open;
     },
 
     // Update DOM on a Received Event
@@ -57,6 +61,18 @@ app.initialize();
 
     $('.clear-coords').on('click', () => {
         $('.gps-error, .gps-info').html('');
+    });
+})();
+
+(function () {
+    $('a[target]').on('click', function () {
+        var $link = $(this);
+        var url = $link.attr('href');
+        var target = $link.attr('target');
+
+        cordova.InAppBrowser.open(url, target);
+
+        return false;
     });
 })();
 
