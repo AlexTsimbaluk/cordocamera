@@ -36,7 +36,7 @@
         <link rel="stylesheet" type="text/css" href="libs/utils/layout.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
 
-        <title>Hello World</title>
+        <title>Cordova plugins</title>
     </head>
 
     <body>
@@ -48,10 +48,11 @@
                 </div>
             </div>
 
-            <div class="content grow-1 size-12 flex top">
+            <div class="content grow-1 size-12 flex top overflow-y">
                 <div class="plugin-block">
+                    <h4>GPS coordinates</h4>
+
                     <div class="gps-info"></div>
-                    <div class="gps-error"></div>
 
                     <div class="flex left">
                         <div class="size-12">
@@ -64,21 +65,27 @@
                     </div>
                 </div>
 
-                <div class="plugin-block flex left">
-                    <div class="size-8">
-                        <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_self">self</a>
-                    </div>
+                <div class="plugin-block">
+                    <h4>Links in App</h4>
 
-                    <div class="size-8">
-                        <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_blank">blank</a>
-                    </div>
+                    <div class="flex left">
+                        <div class="size-8">
+                            <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_self">self</a>
+                        </div>
 
-                    <div class="size-8">
-                        <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_system">system</a>
+                        <div class="size-8">
+                            <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_blank">blank</a>
+                        </div>
+
+                        <div class="size-8">
+                            <a class="w-fill btn btn-default btn-raised no-focus-shadow" href="https://cordova.apache.org/docs/ru/latest/config_ref/images.html" target="_system">system</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="plugin-block">
+                    <h4>Info about device</h4>
+
                     <div class="device-info"></div>
 
                     <div class="flex left">
@@ -93,6 +100,8 @@
                 </div>
 
                 <div class="plugin-block">
+                    <h4>Info about connection</h4>
+
                     <div class="connection-info"></div>
 
                     <div class="flex left">
@@ -102,6 +111,24 @@
 
                         <div class="size-12">
                             <button class="w-fill btn btn-info btn-raised no-focus-shadow clear-connection" data-clear=".connection">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plugin-block hidden">
+                    <h4>Vibration</h4>
+
+                    <div class="flex left">
+                        <div class="size-8">
+                            <button class="w-fill btn btn-info btn-raised no-focus-shadow vibrate-single" data-event="vibrate" data-vibrate-arg="1500">Single</button>
+                        </div>
+
+                        <div class="size-8">
+                            <button class="w-fill btn btn-info btn-raised no-focus-shadow vibrate-multiple" data-event="vibrate" data-vibrate-arg="[1000, 1000, 3000, 1000, 5000]">Multiple</button>
+                        </div>
+
+                        <div class="size-8">
+                            <button class="w-fill btn btn-info btn-raised no-focus-shadow vibrate-stop" data-event="vibrate" data-vibrate-arg="0">Stop</button>
                         </div>
                     </div>
                 </div>

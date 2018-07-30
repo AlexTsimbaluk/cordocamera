@@ -110,13 +110,22 @@ app.initialize();
     });
 })();
 
-(function checkConnection() {
+(function () {
     var $connectionInfo = $('.connection-info');
 
     $('.get-connection').on('click', () => {
         var connectionInfo = app.checkConnection();
 
         $connectionInfo.html(connectionInfo);
+    });
+})();
+
+(function () {
+    $('[data-event="vibrate"]').on('click', function () {
+        var vibrateArg = $(this).attr('data-vibrate-arg');
+        console.log(vibrateArg);
+
+        navigator.vibrate(3000);
     });
 })();
 

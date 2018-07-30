@@ -24,6 +24,12 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
   "dependent_plugins": {}
