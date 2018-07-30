@@ -18,6 +18,9 @@
     },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
   "dependent_plugins": {}

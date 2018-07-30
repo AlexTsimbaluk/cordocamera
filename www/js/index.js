@@ -76,4 +76,18 @@ app.initialize();
     });
 })();
 
+(function () {
+    var $deviceInfo = $('.device-info');
+
+    $('.get-device').on('click', () => {
+        var deviceInfo = 'Device Model: ' + device.model + '<br />' + 'Device Version: ' + device.version + '<br />' + 'Device UUID: ' + device.uuid + '<br />' + 'Device Platform: ' + device.platform + '<br />' + 'Device Cordova: ' + device.cordova + '<br />';
+
+        $deviceInfo.html(deviceInfo);
+    });
+
+    $('.clear-device').on('click', () => {
+        $deviceInfo.html('');
+    });
+})();
+
 $(document).on('ready', function () {});
