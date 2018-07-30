@@ -17,7 +17,7 @@ var app = {
 
         window.open = cordova.InAppBrowser.open;
 
-        // this.checkConnection();
+        this.clearInfo();
     },
 
     // Update DOM on a Received Event
@@ -30,6 +30,15 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    clearInfo: function () {
+        $('[data-clear]').on('click', function () {
+            var $clearTarget = $(this).attr('data-clear');
+            $clearTarget += '-info';
+
+            $($clearTarget).html('');
+        });
     },
 
     // получаем информацию о сетевом соединении
@@ -68,18 +77,14 @@ app.initialize();
     }
 
     function gpsError(error) {
-        $('.gps-error').html('GPS ERROR(' + error.code + '): ' + error.message);
+        $('.gps-info').html('GPS ERROR(' + error.code + '): ' + error.message);
 
         console.log('GPS Error!');
         console.log(error);
     }
 
-    $('.get-coords').on('click', () => {
+    $('.get-gps').on('click', () => {
         navigator.geolocation.getCurrentPosition(gpsSuccess, gpsError, gpsOptions);
-    });
-
-    $('.clear-coords').on('click', () => {
-        $('.gps-error, .gps-info').html('');
     });
 })();
 
@@ -103,10 +108,6 @@ app.initialize();
 
         $deviceInfo.html(deviceInfo);
     });
-
-    $('.clear-device').on('click', () => {
-        $deviceInfo.html('');
-    });
 })();
 
 (function checkConnection() {
@@ -116,10 +117,6 @@ app.initialize();
         var connectionInfo = app.checkConnection();
 
         $connectionInfo.html(connectionInfo);
-    });
-
-    $('.clear-connection').on('click', () => {
-        $connectionInfo.html('');
     });
 })();
 
