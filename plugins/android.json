@@ -21,6 +21,9 @@
     },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
   "dependent_plugins": {}

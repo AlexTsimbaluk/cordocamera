@@ -16,6 +16,8 @@ var app = {
         $.material.init();
 
         window.open = cordova.InAppBrowser.open;
+
+        // this.checkConnection();
     },
 
     // Update DOM on a Received Event
@@ -28,6 +30,23 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    // получаем информацию о сетевом соединении
+    checkConnection: function () {
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN] = 'Unknown';
+        states[Connection.ETHERNET] = 'Ethernet';
+        states[Connection.WIFI] = 'WiFi';
+        states[Connection.CELL_2G] = 'Cell 2G';
+        states[Connection.CELL_3G] = 'Cell 3G';
+        states[Connection.CELL_4G] = 'Cell 4G';
+        states[Connection.CELL] = 'Cell generic';
+        states[Connection.NONE] = 'No network';
+
+        return 'Connection type: ' + states[networkState];
     }
 };
 
@@ -87,6 +106,20 @@ app.initialize();
 
     $('.clear-device').on('click', () => {
         $deviceInfo.html('');
+    });
+})();
+
+(function checkConnection() {
+    var $connectionInfo = $('.connection-info');
+
+    $('.get-connection').on('click', () => {
+        var connectionInfo = app.checkConnection();
+
+        $connectionInfo.html(connectionInfo);
+    });
+
+    $('.clear-connection').on('click', () => {
+        $connectionInfo.html('');
     });
 })();
 
