@@ -104,7 +104,7 @@ app.initialize();
     var $deviceInfo = $('.device-info');
 
     $('.get-device').on('click', () => {
-        var deviceInfo = 'Device Model: ' + device.model + '<br />' + 'Device Version: ' + device.version + '<br />' + 'Device UUID: ' + device.uuid + '<br />' + 'Device Platform: ' + device.platform + '<br />' + 'Device Cordova: ' + device.cordova + '<br />';
+        var deviceInfo = 'Device Model: ' + device.model + '<br />' + 'Device Manufacturer: ' + device.manufacturer + '<br />' + 'Device Platform: ' + device.platform + '<br />' + 'Device Version: ' + device.version + '<br />' + 'Device Serial number: ' + device.serial + '<br />' + 'Device UUID: ' + device.uuid + '<br />' + 'Device Cordova: ' + device.cordova + '<br />';
 
         $deviceInfo.html(deviceInfo);
     });
