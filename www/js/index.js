@@ -37,6 +37,23 @@ var app = {
         }
     },
 
+    confirm: function (args) {
+        var msg = args[0];
+        var cb = args[1];
+
+        if (navigator.notification) {
+            if (args.length > 2) {
+                var title = args[2];
+                var btn = args[3];
+                navigator.notification.confirm(msg, cb, title, btn);
+            } else {
+                navigator.notification.confirm(msg, cb);
+            }
+        } else {
+            window.confirm(msg);
+        }
+    },
+
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
@@ -148,7 +165,6 @@ app.initialize();
 
 (function () {
     $('[data-dialog="alert"]').on('click', function () {
-        var $info = $('.dialog-info');
         var alertArgs = [];
 
         var dialogType = $(this).attr('data-dialog');
@@ -187,6 +203,51 @@ app.initialize();
         }
 
         app.alert(alertArgs);
+    });
+})();
+
+(function () {
+    $('[data-dialog="confirm"]').on('click', function () {
+        var args = [];
+
+        var dialogType = $(this).attr('data-dialog');
+        console.log(dialogType);
+
+        var dialogMsg = $(this).attr('data-msg');
+        console.log(dialogMsg);
+
+        if (dialogMsg === undefined) {
+            throw new Error('Message is required!');
+        } else {
+            args.push(dialogMsg);
+        }
+
+        var dialogCallback = $(this).attr('data-callback');
+        console.log(dialogCallback);
+
+        if (dialogCallback === undefined) {
+            args.push(null);
+        } else {
+            var cb = buttonIndex => {
+                app.alert(['Вы нажали ' + buttonIndex, null, 'Callback', 'Понятненько']);
+            };
+            args.push(cb);
+        }
+
+        var dialogTitle = $(this).attr('data-title');
+        console.log(dialogTitle);
+
+        var dialogBtn = $(this).attr('data-btn');
+        console.log(dialogBtn);
+
+        if (dialogTitle !== undefined && dialogBtn !== undefined) {
+            args.push(dialogTitle);
+
+            let btns = dialogBtn.split('::');
+            args.push(btns);
+        }
+
+        app.confirm(args);
     });
 })();
 
