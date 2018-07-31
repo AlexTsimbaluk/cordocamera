@@ -20,6 +20,23 @@ var app = {
         this.clearInfo();
     },
 
+    alert: function (args) {
+        var msg = args[0];
+        var cb = args[1];
+
+        if (navigator.notification) {
+            if (args.length > 2) {
+                var title = args[2];
+                var btn = args[3];
+                navigator.notification.alert(msg, cb, title, btn);
+            } else {
+                navigator.notification.alert(msg, cb);
+            }
+        } else {
+            window.alert(msg);
+        }
+    },
+
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
@@ -126,6 +143,50 @@ app.initialize();
         console.log(vibrateArg);
 
         navigator.vibrate(3000);
+    });
+})();
+
+(function () {
+    $('[data-dialog="alert"]').on('click', function () {
+        var $info = $('.dialog-info');
+        var alertArgs = [];
+
+        var dialogType = $(this).attr('data-dialog');
+        console.log(dialogType);
+
+        var dialogMsg = $(this).attr('data-alert-msg');
+        console.log(dialogMsg);
+
+        if (dialogMsg === undefined) {
+            throw new Error('Message is required!');
+        } else {
+            alertArgs.push(dialogMsg);
+        }
+
+        var dialogCallback = $(this).attr('data-alert-callback');
+        console.log(dialogCallback);
+
+        if (dialogCallback === undefined) {
+            alertArgs.push(null);
+        } else {
+            var cb = () => {
+                app.alert(['This is callback', null]);
+            };
+            alertArgs.push(cb);
+        }
+
+        var dialogTitle = $(this).attr('data-alert-title');
+        console.log(dialogTitle);
+
+        var dialogBtn = $(this).attr('data-alert-btn');
+        console.log(dialogBtn);
+
+        if (dialogTitle !== undefined && dialogBtn !== undefined) {
+            alertArgs.push(dialogTitle);
+            alertArgs.push(dialogBtn);
+        }
+
+        app.alert(alertArgs);
     });
 })();
 
