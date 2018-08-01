@@ -1921,3 +1921,12 @@ input[type=radio]:focus {
 .footer {
   height: 15vmin;
 }
+.platform-browser .android {
+  display: none;
+}
+.platform-android .browser {
+  display: none;
+}
+.gps-watching *:not(.watch-block) {
+  display: none;
+}

@@ -46,28 +46,28 @@
                     <p class="event listening">Connecting to Device</p>
                     <p class="event received">Device is Ready</p>
                 </div>
-
-                <div class="debug-log"></div>
             </div>
 
             <div class="content grow-1 size-12 flex top overflow-y">
+                <div class="debug-log"></div>
+
                 <div class="plugin-block">
                     <h4>GPS coordinates</h4>
 
                     <div class="gps-info"></div>
 
                     <div class="flex left">
-                        <div class="size-8 grow-1">
+                        <div class="size-8 grow-1 gps-block">
                             <button class="w-fill btn btn-info btn-raised no-focus-shadow get-gps">Get GPS</button>
                         </div>
 
-                        <div class="size-8 grow-1 watch-block hidden">
-                            <button class="w-fill btn btn-info btn-raised no-focus-shadow watch-gps">Watch</button>
-                            <button class="w-fill btn btn-danger btn-raised no-focus-shadow stop-watch-gps hidden">Stop</button>
+                        <div class="size-8 grow-1 watch-block android">
+                            <button class="w-fill btn btn-success btn-raised no-focus-shadow watch-gps">Watch</button>
+                            <button class="w-fill btn btn-danger btn-raised no-focus-shadow stop-watch-gps hidden">Stop watching GPS</button>
                         </div>
 
-                        <div class="size-8 grow-1">
-                            <button class="w-fill btn btn-info btn-raised no-focus-shadow clear-gps" data-clear=".gps">Clear</button>
+                        <div class="size-8 grow-1 gps-block">
+                            <button class="w-fill btn btn-warning btn-raised no-focus-shadow clear-gps" data-clear=".gps">Clear</button>
                         </div>
                     </div>
                 </div>

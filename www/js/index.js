@@ -23,7 +23,6 @@ var app = {
         this.clearInfo();
 
         if (device.platform.toLowerCase() == 'android') {
-            $('.watch-block').removeClass('hidden');
             $('body').addClass('platform-android');
         } else if (device.platform.toLowerCase() == 'browser') {
             $('body').addClass('platform-browser');
@@ -151,12 +150,24 @@ app.initialize();
         timeout: 15000
     };
 
-    function gpsSuccess(position) {
+    function getCoords(position) {
         var crd = position.coords;
-
         var gpsInfo = 'Широта: ' + crd.latitude + '<br/>Долгота: ' + crd.longitude + '<br/>Высота: ' + crd.altitude + '<br/>Точность: ' + crd.accuracy + '<br/>Точность высоты: ' + crd.altitudeAccuracy + '<br/>Направление: ' + crd.heading + '<br/>Скорость: ' + crd.speed + '<br>Timestamp: ' + position.timestamp;
 
+        return gpsInfo;
+    }
+
+    function gpsSuccess(position) {
+        var gpsInfo = getCoords(position);
         $gpsInfo.html(gpsInfo);
+    }
+
+    function gpsWatchSuccess(position) {
+        var gpsInfo = getCoords(position);
+        $gpsInfo.html(gpsInfo);
+
+        $('.gps-block, .watch-gps').addClass('hidden');
+        $('.stop-watch-gps').removeClass('hidden');
     }
 
     function gpsError(error) {
@@ -171,17 +182,17 @@ app.initialize();
     });
 
     $('.watch-gps').on('click', () => {
-        watchID = navigator.geolocation.watchPosition(gpsSuccess, gpsError, gpsOptions);
-
-        $('.watch-gps').addClass('hidden');
-        $('.stop-watch-gps').removeClass('hidden');
+        watchID = navigator.geolocation.watchPosition(gpsWatchSuccess, gpsError, gpsOptions);
+        app.toast.show('Получаем координаты в реальном времени', 2000, 'bottom');
     });
 
     $('.stop-watch-gps').on('click', () => {
         navigator.geolocation.clearWatch(watchID);
 
         $('.stop-watch-gps').addClass('hidden');
-        $('.watch-gps').removeClass('hidden');
+        $('.gps-block, .watch-gps').removeClass('hidden');
+
+        app.toast.show('Останавливаем получение координат', 2000, 'bottom');
 
         $gpsInfo.html('');
     });
