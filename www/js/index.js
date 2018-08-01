@@ -6,6 +6,10 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
+    log: function (text) {
+        $('.debug-log').html(text);
+    },
+
     // deviceready Event Handler
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
@@ -20,6 +24,9 @@ var app = {
 
         if (device.platform.toLowerCase() == 'android') {
             $('.watch-block').removeClass('hidden');
+            $('body').addClass('platform-android');
+        } else if (device.platform.toLowerCase() == 'browser') {
+            $('body').addClass('platform-browser');
         }
 
         this.toast = window.plugins.toast;
@@ -85,6 +92,12 @@ var app = {
             }
         } else {
             window.confirm(msg);
+        }
+    },
+
+    beep: function (qt) {
+        if (navigator.notification) {
+            navigator.notification.beep(qt);
         }
     },
 
@@ -302,16 +315,16 @@ app.initialize();
     });
 })();
 
-/*(function () {
-    $('[data-toast]').on('click', function () {
-        var toast = window.plugins.toast;
+(function () {
+    $('[data-beep]').on('click', function () {
         var $el = $(this);
-        var pos = $el.attr('data-toast');
-        var msg = $el.attr('data-toast-msg');
-        var time = $el.attr('data-toast-time');
+        var qt = $el.attr('data-beep');
 
-        toast.show(msg, time, pos);
+        // app.log(qt);
+
+        app.beep(qt);
+        app.toast.show('Бибикнем ' + qt, 1500, 'bottom');
     });
-})();*/
+})();
 
 $(document).on('ready', function () {});
