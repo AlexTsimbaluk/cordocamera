@@ -7,7 +7,6 @@ var app = {
     },
 
     // deviceready Event Handler
-    //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function () {
@@ -19,11 +18,40 @@ var app = {
 
         this.clearInfo();
 
-        console.log(device.platform);
-
         if (device.platform.toLowerCase() == 'android') {
             $('.watch-block').removeClass('hidden');
         }
+
+        this.toast = window.plugins.toast;
+        this.bindToast(this.toast);
+    },
+
+    bindToast: function (toast) {
+        $('[data-toast]').on('click', function () {
+            var $el = $(this);
+            var pos = $el.attr('data-toast');
+            var msg = $el.attr('data-toast-msg');
+            var time = $el.attr('data-toast-time');
+
+            if (!$el.attr('data-toast-style')) {
+                toast.show(msg, time, pos);
+            } else {
+                toast.showWithOptions({
+                    message: msg,
+                    duration: time, // 2000 ms
+                    position: pos,
+                    styling: {
+                        opacity: 0.75, // Default 0.8
+                        backgroundColor: '#eeeeee', // Default #333333
+                        textColor: '#333333', // Default #FFFFFF
+                        // textSize: 20.5, // Default is approx. 13.
+                        cornerRadius: 16 // minimum is 0 (square). iOS default 20, Android default 100
+                        // horizontalPadding: 20, // iOS default 16, Android default 50
+                        // verticalPadding: 16 // iOS default 12, Android default 30
+                    }
+                });
+            }
+        });
     },
 
     alert: function (args) {
@@ -95,7 +123,7 @@ var app = {
         states[Connection.CELL] = 'Cell generic';
         states[Connection.NONE] = 'No network';
 
-        return 'Connection type: ' + states[networkState];
+        return states[networkState];
     }
 };
 
@@ -103,13 +131,14 @@ app.initialize();
 
 (function () {
     var watchID;
+    var $gpsInfo = $('.gps-info');
+
     var gpsOptions = {
         enableHighAccuracy: true,
         timeout: 15000
     };
 
     function gpsSuccess(position) {
-        var $gpsInfo = $('.gps-info');
         var crd = position.coords;
 
         var gpsInfo = 'Широта: ' + crd.latitude + '<br/>Долгота: ' + crd.longitude + '<br/>Высота: ' + crd.altitude + '<br/>Точность: ' + crd.accuracy + '<br/>Точность высоты: ' + crd.altitudeAccuracy + '<br/>Направление: ' + crd.heading + '<br/>Скорость: ' + crd.speed + '<br>Timestamp: ' + position.timestamp;
@@ -173,7 +202,8 @@ app.initialize();
     $('.get-connection').on('click', () => {
         var connectionInfo = app.checkConnection();
 
-        $connectionInfo.html(connectionInfo);
+        $connectionInfo.html('Connection type: ' + connectionInfo);
+        app.toast.show('Вот вам сеть, она ' + connectionInfo, 1500, 'bottom');
     });
 })();
 
@@ -234,11 +264,8 @@ app.initialize();
         var args = [];
 
         var dialogType = $(this).attr('data-dialog');
-        console.log(dialogType);
 
         var dialogMsg = $(this).attr('data-msg');
-        console.log(dialogMsg);
-
         if (dialogMsg === undefined) {
             throw new Error('Message is required!');
         } else {
@@ -252,7 +279,8 @@ app.initialize();
             args.push(null);
         } else {
             var cb = buttonIndex => {
-                app.alert(['Вы нажали ' + buttonIndex, null, 'Callback', 'Понятненько']);
+                let msg = buttonIndex == 0 ? 'Окно заигнорено' : buttonIndex == 1 ? 'Ответ утвердительлный' : 'Ответ отрицательный';
+                app.toast.show(msg, 1500, 'bottom');
             };
             args.push(cb);
         }
@@ -273,5 +301,17 @@ app.initialize();
         app.confirm(args);
     });
 })();
+
+/*(function () {
+    $('[data-toast]').on('click', function () {
+        var toast = window.plugins.toast;
+        var $el = $(this);
+        var pos = $el.attr('data-toast');
+        var msg = $el.attr('data-toast-msg');
+        var time = $el.attr('data-toast-time');
+
+        toast.show(msg, time, pos);
+    });
+})();*/
 
 $(document).on('ready', function () {});
