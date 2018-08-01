@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 
 // при изменении файлов откладываем перезагрузку на это время,
 // чтобы cordova успела перезапуститься
-var RELOAD_TIMEOUT = 2500;
+var RELOAD_TIMEOUT = 2000;
 
 
 
