@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "511161923995",
+    "firebase_url": "https://cordova-5f6f2.firebaseio.com",
+    "project_id": "cordova-5f6f2",
+    "storage_bucket": "cordova-5f6f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511161923995:android:6c9ee4e429bf275e",
+        "android_client_info": {
+          "package_name": "com.camera.cordova"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511161923995-b0k1p9ts622l0sam1sfntvdu5j1k883l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwHyo9KZh536GkLUVhMaukPJ_f_NwTxok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
