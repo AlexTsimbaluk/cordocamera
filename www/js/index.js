@@ -18,6 +18,12 @@ var app = {
         window.open = cordova.InAppBrowser.open;
 
         this.clearInfo();
+
+        console.log(device.platform);
+
+        if (device.platform.toLowerCase() == 'android') {
+            $('.watch-block').removeClass('hidden');
+        }
     },
 
     alert: function (args) {
@@ -96,6 +102,7 @@ var app = {
 app.initialize();
 
 (function () {
+    var watchID;
     var gpsOptions = {
         enableHighAccuracy: true,
         timeout: 15000
@@ -119,6 +126,22 @@ app.initialize();
 
     $('.get-gps').on('click', () => {
         navigator.geolocation.getCurrentPosition(gpsSuccess, gpsError, gpsOptions);
+    });
+
+    $('.watch-gps').on('click', () => {
+        watchID = navigator.geolocation.watchPosition(gpsSuccess, gpsError, gpsOptions);
+
+        $('.watch-gps').addClass('hidden');
+        $('.stop-watch-gps').removeClass('hidden');
+    });
+
+    $('.stop-watch-gps').on('click', () => {
+        navigator.geolocation.clearWatch(watchID);
+
+        $('.stop-watch-gps').addClass('hidden');
+        $('.watch-gps').removeClass('hidden');
+
+        $gpsInfo.html('');
     });
 })();
 
