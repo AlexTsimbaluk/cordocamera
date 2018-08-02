@@ -8,7 +8,15 @@ var app = {
     },
 
     log: function (text) {
+        var log = $('.debug-log');
         $('.debug-log').append(text + '<br>');
+        if (!log.hasClass('not-empty')) {
+            log.addClass('not-empty');
+        }
+
+        log.find('.clear').on('click', () => {
+            log.html('').removeClass('not-empty');
+        });
     },
 
     // deviceready Event Handler

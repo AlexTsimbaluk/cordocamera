@@ -1921,6 +1921,18 @@ input[type=radio]:focus {
 .footer {
   height: 15vmin;
 }
+.debug-log {
+  position: relative;
+}
+.debug-log .clear {
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.debug-log.not-empty .clear {
+  display: block;
+}
 .platform-browser .android {
   display: none;
 }

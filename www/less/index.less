@@ -126,6 +126,22 @@ input[type=radio] {
     height: 15vmin;
 }
 
+
+.debug-log {
+    position: relative;
+    .clear {
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+    &.not-empty {
+        .clear {
+            display: block;
+        }
+    }
+}
+
 .platform-browser {
     .android {
         display: none;
