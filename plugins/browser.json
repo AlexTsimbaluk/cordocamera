@@ -33,9 +33,6 @@
     },
     "cordova-plugin-x-toast": {
       "PACKAGE_NAME": "com.camera.cordova"
-    },
-    "phonegap-plugin-push": {
-      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
   "dependent_plugins": {}

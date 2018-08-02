@@ -22,8 +22,7 @@
     "cordova-plugin-vibration": "^3.1.0",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-toast": "^2.6.2",
-    "gulp": "^3.9.1",
-    "phonegap-plugin-push": "^2.1.3"
+    "gulp": "^3.9.1"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
@@ -48,10 +47,7 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-vibration": {},
       "cordova-plugin-dialogs": {},
-      "cordova-plugin-x-toast": {},
-      "phonegap-plugin-push": {
-        "FCM_VERSION": "11.6.2"
-      }
+      "cordova-plugin-x-toast": {}
     },
     "platforms": [
       "android",
