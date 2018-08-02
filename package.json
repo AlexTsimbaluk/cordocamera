@@ -22,7 +22,8 @@
     "cordova-plugin-vibration": "^3.1.0",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-toast": "^2.6.2",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "cordova-plugin-media": "~5.0.2"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
@@ -47,7 +48,8 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-vibration": {},
       "cordova-plugin-dialogs": {},
-      "cordova-plugin-x-toast": {}
+      "cordova-plugin-x-toast": {},
+      "cordova-plugin-media": {}
     },
     "platforms": [
       "android",

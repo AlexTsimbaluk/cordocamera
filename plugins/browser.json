@@ -33,7 +33,14 @@
     },
     "cordova-plugin-x-toast": {
       "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.camera.cordova"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.camera.cordova"
+    }
+  }
 }

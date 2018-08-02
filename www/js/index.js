@@ -1,13 +1,14 @@
 'use strict';
 
 var app = {
+    that: this,
     // Application Constructor
     initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
     log: function (text) {
-        $('.debug-log').html(text);
+        $('.debug-log').append(text + '<br>');
     },
 
     // deviceready Event Handler
@@ -30,6 +31,29 @@ var app = {
 
         this.toast = window.plugins.toast;
         this.bindToast(this.toast);
+    },
+
+    play: function (url) {
+        var my_media = new Media(url,
+        // success callback
+        () => {
+            this.log("playAudio():Audio Success");
+            console.log("playAudio():Audio Success");
+            my_media.release();
+        },
+        // error callback
+        err => {
+            this.log(window.location.pathname);
+            this.log("Error message: " + err.message);
+            this.log("Error code: " + err.code);
+            this.log(JSON.stringify(err));
+            console.log("Error: " + err);
+        });
+
+        // Play audio
+        my_media.setVolume('1.0');
+        my_media.play();
+        console.log(my_media);
     },
 
     bindToast: function (toast) {
@@ -335,6 +359,27 @@ app.initialize();
 
         app.beep(qt);
         app.toast.show('Бибикнем ' + qt, 1500, 'bottom');
+    });
+})();
+
+(function () {
+    $('[data-audio]').on('click', function () {
+        var $el = $(this);
+        var url = $el.attr('data-audio');
+        var path = window.location.pathname;
+        console.log(path);
+
+        if (device.platform.toLowerCase() == 'android') {
+            // url = '/platforms/android/app/src/main/assets/www' + url;
+            url = path.substring(0, path.lastIndexOf('/')) + url;
+        }
+
+        app.log(url);
+        app.log(path);
+
+        // app.play('/sound/news/incoming.mp3');
+        app.play(url);
+        app.toast.show('Играем', 1500, 'bottom');
     });
 })();
 
