@@ -94,6 +94,7 @@ var app = {
     stop: function () {
         if (this.my_media) {
             this.my_media.stop();
+            this.my_media = null;
         }
     },
 
