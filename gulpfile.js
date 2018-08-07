@@ -110,7 +110,7 @@ gulp.task('_bootstrap-material', function() {
 
 gulp.task('js', function() {
 	return gulp.src([
-				'www/js/index.js'
+				'www/js/app.js'
 			])
 			.pipe(babel())
 			.pipe(concat('index.js'))
@@ -160,7 +160,7 @@ gulp.task('watch', ['browser-sync'], function() {
 
     gulp.watch(
     	[
-    		'www/js/index.js'
+    		'www/js/app.js'
     	],
     	['js', 'deferred-reload']
 	);

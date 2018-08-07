@@ -46,41 +46,42 @@ var app = {
     play: function (url) {
         if (this.my_media == null) {
             this.my_media = new Media(url,
-            // success callback
-            () => {
-                console.log("playAudio():Audio Success");
-                this.my_media = null;
-            },
-            // error callback
-            err => {
-                console.log(window.location.pathname);
-                console.log("Error message: " + err.message);
-                console.log("Error code: " + err.code);
-                console.log(JSON.stringify(err));
-                console.log("Error: " + err);
-            },
-            // onChangeStatus callback
-            status => {
-                if (status == 0) {
-                    console.log('MEDIA_NONE');
-                }
+                // success callback
+                () => {
+                    console.log("playAudio():Audio Success");
+                    this.my_media = null;
+                },
+                // error callback
+                err => {
+                    console.log(window.location.pathname);
+                    console.log("Error message: " + err.message);
+                    console.log("Error code: " + err.code);
+                    console.log(JSON.stringify(err));
+                    console.log("Error: " + err);
+                },
+                // onChangeStatus callback
+                status => {
+                    if (status == 0) {
+                        console.log('MEDIA_NONE');
+                    }
 
-                if (status == 1) {
-                    console.log('MEDIA_STARTING');
-                }
+                    if (status == 1) {
+                        console.log('MEDIA_STARTING');
+                    }
 
-                if (status == 2) {
-                    console.log('MEDIA_RUNNING');
-                }
+                    if (status == 2) {
+                        console.log('MEDIA_RUNNING');
+                    }
 
-                if (status == 3) {
-                    console.log('MEDIA_PAUSED');
-                }
+                    if (status == 3) {
+                        console.log('MEDIA_PAUSED');
+                    }
 
-                if (status == 4) {
-                    console.log('MEDIA_STOPPED');
+                    if (status == 4) {
+                        console.log('MEDIA_STOPPED');
+                    }
                 }
-            });
+            );
         }
 
         console.log(this.my_media);
@@ -89,6 +90,7 @@ var app = {
         if (this.my_media._position == -1) {
             this.my_media.play();
         }
+
     },
 
     stop: function () {
