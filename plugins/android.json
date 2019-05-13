@@ -7,7 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.camera.cordova"
+    },
+    "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
     "cordova-plugin-geolocation": {
@@ -16,25 +19,22 @@
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.camera.cordova"
-    },
-    "cordova-plugin-device": {
+    "cordova-plugin-media": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.camera.cordova"
+    },
     "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
-    "cordova-plugin-dialogs": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.camera.cordova"
     },
     "cordova-plugin-x-toast": {
-      "PACKAGE_NAME": "com.camera.cordova"
-    },
-    "cordova-plugin-media": {
       "PACKAGE_NAME": "com.camera.cordova"
     }
   },
