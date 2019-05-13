@@ -218,11 +218,27 @@ app.initialize();
         timeout: 15000
     };
 
+    var speedChart = [];
+
+    function dateFromTimestap(timestamp) {
+        var d = new Date(timestamp);
+        var sec = (d.getSeconds() < 10) ? ('0' + d.getSeconds()) : d.getSeconds()
+        return d.getHours() + ':' + d.getMinutes() + ':' + sec;
+    }
+
     function getCoords(position) {
         var crd = position.coords;
-        var gpsInfo = 'Широта: ' + crd.latitude + '<br/>Долгота: ' + crd.longitude + '<br/>Высота: ' + crd.altitude + '<br/>Точность: ' + crd.accuracy + '<br/>Точность высоты: ' + crd.altitudeAccuracy + '<br/>Направление: ' + crd.heading + '<br/>Скорость: ' + crd.speed + '<br>Timestamp: ' + position.timestamp;
+        var gpsInfo = 'Широта: ' + crd.latitude + '<br/>Долгота: ' + crd.longitude + '<br/>Высота: ' + crd.altitude + '<br/>Точность: ' + crd.accuracy + '<br/>Точность высоты: ' + crd.altitudeAccuracy + '<br/>Направление: ' + crd.heading + '<br/>Скорость: ' + getSpeedInKm(crd.speed) + '<br>Timestamp: ' + dateFromTimestap(position.timestamp);
 
         return gpsInfo;
+    }
+
+    function getSpeedInKm(speedInM) {
+        return speedInM * 3600 / 1000;
+    }
+
+    function setSpeedChart(speed, timestamp) {
+        speedChart.push({speed: speed, timestamp: timestamp});
     }
 
     function gpsSuccess(position) {
@@ -232,6 +248,8 @@ app.initialize();
 
     function gpsWatchSuccess(position) {
         var gpsInfo = getCoords(position);
+        setSpeedChart(getSpeedInKm(position.coords.speed), position.coords.timestamp);
+
         $gpsInfo.html(gpsInfo);
 
         $('.gps-block, .watch-gps').addClass('hidden');
